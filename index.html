@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IZZY DRAWINGS</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Barra de navegación -->
+  <nav id="navbar" class="fade-in">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="#">IZZY DRAWINGS</a>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="#hero">Inicio</a></li>
+        <li><a href="#gallery">Galería</a></li>
+        <li><a href="#contact">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Sección Hero a pantalla completa con zoom on scroll -->
+  <header id="hero" class="hero">
+    <div class="hero-bg" style="background-image: url('oleo-acrilico/paisaje-rio-arbol.jpg');" aria-hidden="true"></div>
+    <div class="hero-text fade-in">
+      <div class="signature-row">
+        <a class="sig-link left" href="#about">sobre mi</a>
+        <div class="sig sig-svg">
+          <img class="hero-signature" src="firma.png" alt="Firma IZZY DRAWINGS" />
+        </div>
+        <a class="sig-link right" href="#contact">contacto</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filtro SVG para engrosar y colorear en blanco el trazo -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="sign-dilate-white" color-interpolation-filters="sRGB">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="1.8" result="DILATED" />
+      <feFlood flood-color="#ffffff" result="WHITE" />
+      <feComposite in="WHITE" in2="DILATED" operator="in" result="FILL" />
+      <feMerge>
+        <feMergeNode in="FILL" />
+      </feMerge>
+    </filter>
+  </svg>
+
+  <!-- Galería: 4 estilos principales -->
+  <section id="gallery" class="gallery">
+    <!-- Ilustración Digital -->
+    <div class="gallery-item fade-in" data-style="ilustracion-digital">
+      <img src="ilustracion-digital/chica-ordenador-flat.png" alt="Ilustración Digital">
+      <div class="item-caption"><h3>Ilustración Digital</h3><p>Personajes, cartoon, pop art.</p></div>
+    </div>
+    <!-- Acuarela -->
+    <div class="gallery-item fade-in" data-style="acuarela">
+      <img src="acuarela/gato-acuarela.png" alt="Acuarela">
+      <div class="item-caption"><h3>Acuarela</h3><p>Botánica, animales, decorativa.</p></div>
+    </div>
+    <!-- Óleo / Acrílico -->
+    <div class="gallery-item fade-in" data-style="oleo-acrilico">
+      <img src="oleo-acrilico/paisaje-invernal-nieve.jpg" alt="Óleo / Acrílico">
+      <div class="item-caption"><h3>Óleo / Acrílico</h3><p>Paisajes, marinas, bodegón.</p></div>
+    </div>
+    <!-- Lápiz -->
+    <div class="gallery-item fade-in" data-style="lapiz">
+      <img src="lapiz/dibujo-lapiz-figura.png" alt="Lápiz">
+      <div class="item-caption"><h3>Lápiz</h3><p>Retratos y estudio tonal.</p></div>
+    </div>
+  </section>
+
+  <!-- Resultados del estilo seleccionado (se rellena al hacer clic) -->
+  <section id="style-results" class="style-results" aria-live="polite"></section>
+
+  <!-- Banner o Pie de página con datos de ejemplo -->
+  <footer id="contact" class="banner fade-in">
+    <h2>¡Gracias por visitar!</h2>
+    <p>Sigue explorando mis creaciones y contáctame para proyectos personalizados.</p>
+    <div class="bottom-bar">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum est at turpis porta, in dictum arcu venenatis. Aliquam erat volutpat. Nulla facilisi. Phasellus et nulla vitae neque varius dignissim. Vivamus in nunc nec velit interdum auctor.</p>
+      <p>Sed ac mauris et libero hendrerit tincidunt. Nulla a urna ac justo bibendum semper. Proin eget urna et justo efficitur gravida. Curabitur vel eros nec dui cursus commodo.</p>
+    </div>
+  </footer>
+  <!-- Overlay global para difuminar el resto de la página al hacer hover en una tarjeta -->
+  <div class="page-blur-overlay" aria-hidden="true"></div>
+
+  <!-- Visor de obra (modal) -->
+  <div id="lightbox" class="lightbox" hidden>
+    <div class="lightbox-backdrop" aria-hidden="true"></div>
+    <div class="lightbox-content" role="dialog" aria-modal="true" aria-label="Detalle de obra">
+      <button class="lightbox-close" aria-label="Cerrar">×</button>
+      <button class="lightbox-nav prev" aria-label="Anterior">‹</button>
+      <button class="lightbox-nav next" aria-label="Siguiente">›</button>
+      <div class="lightbox-body">
+        <div class="lightbox-media">
+          <img class="lightbox-image" src="" alt="Obra seleccionada" />
+        </div>
+        <div class="lightbox-info">
+          <h2 class="info-title">Título de la obra</h2>
+          <div class="info-meta">
+            <p class="meta-item"><strong>Fecha:</strong> <span class="meta-date">2024-09-10</span></p>
+            <p class="meta-item"><strong>Técnica:</strong> <span class="meta-technique">—</span></p>
+            <p class="meta-item"><strong>Estilo:</strong> <span class="meta-style">—</span></p>
+          </div>
+          <div class="info-text">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae eros at velit porttitor vulputate. Sed nec libero id nibh mollis placerat.</p>
+            <p>Donec in lorem feugiat, bibendum mi quis, facilisis lacus. Integer dignissim, risus non porta sollicitudin, nulla libero placerat arcu, eu vulputate est felis in enim.</p>
+            <p>Curabitur vel arcu sit amet dui rhoncus lobortis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+ 

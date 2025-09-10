@@ -1,0 +1,302 @@
+/* Local fonts */
+@font-face {
+  font-family: 'M PLUS 1';
+  src: url('fuente/Bentham,M_PLUS_1/M_PLUS_1/MPLUS1-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Static weight fallbacks (if variable fonts unsupported) */
+@font-face { font-family: 'M PLUS 1'; src: url('fuente/Bentham,M_PLUS_1/M_PLUS_1/static/MPLUS1-Thin.ttf') format('truetype'); font-weight: 100; font-style: normal; font-display: swap; }
+@font-face { font-family: 'M PLUS 1'; src: url('fuente/Bentham,M_PLUS_1/M_PLUS_1/static/MPLUS1-ExtraLight.ttf') format('truetype'); font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: 'M PLUS 1'; src: url('fuente/Bentham,M_PLUS_1/M_PLUS_1/static/MPLUS1-Light.ttf') format('truetype'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'M PLUS 1'; src: url('fuente/Bentham,M_PLUS_1/M_PLUS_1/static/MPLUS1-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'M PLUS 1'; src: url('fuente/Bentham,M_PLUS_1/M_PLUS_1/static/MPLUS1-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'M PLUS 1'; src: url('fuente/Bentham,M_PLUS_1/M_PLUS_1/static/MPLUS1-SemiBold.ttf') format('truetype'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'M PLUS 1'; src: url('fuente/Bentham,M_PLUS_1/M_PLUS_1/static/MPLUS1-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'M PLUS 1'; src: url('fuente/Bentham,M_PLUS_1/M_PLUS_1/static/MPLUS1-ExtraBold.ttf') format('truetype'); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: 'M PLUS 1'; src: url('fuente/Bentham,M_PLUS_1/M_PLUS_1/static/MPLUS1-Black.ttf') format('truetype'); font-weight: 900; font-style: normal; font-display: swap; }
+
+/* Optional display font for headings (installed, but not applied by default)
+@font-face {
+  font-family: 'Bentham';
+  src: url('fuente/Bentham,M_PLUS_1/Bentham/Bentham-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'M PLUS 1', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f7f0f5;
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* Barra de navegación */
+#navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 10px 20px;
+  z-index: 1000;
+  transform: translateY(-100%);
+  transition: transform 0.5s ease;
+}
+
+#navbar.visible {
+  transform: translateY(0);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-menu li a {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.nav-menu li a:hover {
+  color: #555;
+}
+
+/* Sección Hero */
+.hero {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Capa de fondo del hero que hace zoom al hacer scroll */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: scale(var(--hero-scale, 1));
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+}
+
+/* Posicionar el texto del hero en la esquina superior izquierda */
+.hero-text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 8px 5%;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: slideIn 0.8s forwards;
+  animation-delay: 0.4s;
+}
+
+.hero-text h1 { font-size: 2rem; margin-bottom: 6px; color: #fff; letter-spacing: 1px; }
+
+.hero-text p { font-size: 1rem; color: #f0f0f0; }
+
+/* Firma en el hero */
+.signature-row { max-width: min(1200px, 95vw); margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 16px; }
+.sig { display: flex; align-items: center; justify-content: center; position: relative; }
+.hero-signature { max-width: min(70vw, 520px); max-height: 90px; width: auto; height: auto; display: inline-block; filter: none; }
+
+/* Enlaces laterales junto a la firma */
+.sig-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0.95;
+  transition: opacity 0.2s ease;
+}
+.sig-link:hover { opacity: 1; text-decoration: underline; }
+
+/* Variante: filtro SVG dilate + relleno blanco */
+.sig-svg .hero-signature { filter: url(#sign-dilate-white); }
+
+@media (max-width: 800px) {
+  .signature-row { gap: 10px; }
+  .hero-signature { max-height: 70px; }
+}
+
+/* Keyframes para animación del hero-text */
+@keyframes slideIn { to { opacity: 1; transform: translateY(0); } }
+
+/* Galería de imágenes */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center; /* centra filas incompletas */
+  padding: 60px 5%;
+  margin-top: 20px;
+}
+
+.gallery-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 280px; /* tamaño base */
+  aspect-ratio: 1 / 1; /* formato cuadrado */
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transform: scale(1);
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+  will-change: transform;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* llenar el cuadro sin bandas */
+  display: block;
+  transition: none;
+  transform-origin: center center;
+}
+
+/* Hover: la tarjeta (caja) crece ~40% sin desplazar las demás */
+.gallery-item:hover {
+  transform: scale(1.25);
+  position: relative;
+  z-index: 3001; /* sobre el overlay de blur */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.28);
+}
+
+/* Pie de información que aparece por abajo sin tapar la imagen */
+.item-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  text-align: left;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 14px;
+  transition: max-height 0.18s ease-out, padding 0.18s ease-out;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+.item-caption h3 { margin: 10px 0 6px; font-size: 1.05rem; color: #fff; }
+.item-caption p { margin-bottom: 12px; font-size: 0.9rem; color: #eee; }
+.gallery-item:hover .item-caption {
+  max-height: 130px; /* espacio para el texto */
+  padding: 12px 14px;
+}
+
+/* Resultados del estilo seleccionado */
+.style-results {
+  display: none;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 10px 5% 60px;
+}
+.style-results.open { display: flex; }
+
+.style-results .title {
+  flex-basis: 100%;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin: 6px 0 10px;
+}
+
+/* Aparición sutil de resultados */
+.appear { opacity: 0; transform: translateY(12px); transition: opacity .25s ease, transform .25s ease; }
+.appear.show { opacity: 1; transform: none; }
+
+/* Banner / Pie de página y barra inferior */
+.banner {
+  background-color: #fde4f2;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.banner h2 {
+  margin-bottom: 10px;
+}
+
+.bottom-bar {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #555;
+  max-width: 800px;
+  margin: 20px auto 0;
+}
+
+/* Overlay global: difumina la página excepto una "ventana" circular sobre la tarjeta activa */
+.page-blur-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.12s ease-out;
+  backdrop-filter: blur(4px) brightness(0.85);
+  -webkit-backdrop-filter: blur(4px) brightness(0.85);
+}
+.page-blur-overlay.visible { opacity: 1; }
+
+/* Lightbox (visor de obra) */
+.lightbox[hidden] { display: none; }
+.lightbox { position: fixed; inset: 0; z-index: 4000; display: grid; place-items: center; }
+.lightbox-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.55); opacity: 0; transition: opacity .18s ease-out; }
+.lightbox-content {
+  position: relative;
+  width: min(1100px, 92vw);
+  height: min(720px, 88vh);
+  background: #fff; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  overflow: hidden; transform: translateY(12px) scale(.98); opacity: 0; transition: transform .22s ease, opacity .22s ease;
+}
+.lightbox.open .lightbox-backdrop { opacity: 1; }
+.lightbox.open .lightbox-content { transform: none; opacity: 1; }
+.lightbox-body { display: grid; grid-template-columns: 1.2fr 1fr; height: 100%; }
+.lightbox-media { background:#000; display:flex; align-items:center; justify-content:center; }
+.lightbox-image { max-width: 100%; max-height: 100%; object-fit: contain; }
+.lightbox-info { padding: 20px 22px; overflow: auto; }
+.info-title { font-size: 1.6rem; margin: 4px 0 10px; }
+.info-meta { font-size: .95rem; color: #555; margin-bottom: 14px; }
+.info-text p { margin: 0 0 10px; line-height: 1.55; font-size: .95rem; }
+.lightbox-close { position: absolute; top: 8px; right: 10px; background: rgba(0,0,0,0.65); color: #fff; border: 0; width: 34px; height: 34px; border-radius: 8px; font-size: 22px; cursor: pointer; line-height: 34px; }
+.lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.55); color: #fff; border: 0; width: 36px; height: 42px; border-radius: 8px; cursor: pointer; font-size: 24px; line-height: 42px; }
+.lightbox-nav.prev { left: 10px; }
+.lightbox-nav.next { right: 10px; }
+@media (max-width: 900px) { .lightbox-body { grid-template-columns: 1fr; } .lightbox-info { padding: 16px; } }
+
+/* Animaciones generales */
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s ease, transform 1s ease;
+}
+.fade-in:not(.gallery-item) { transform: translateY(20px); }
+
+.fade-in.visible { opacity: 1; }
+.fade-in.visible:not(.gallery-item) { transform: translateY(0); }
